@@ -1,4 +1,5 @@
 import sys
+import math
 from PyQt5.QtWidgets import*
 from PyQt5.QtGui import*
 from PyQt5.QtCore import*
@@ -17,9 +18,9 @@ class Example( QWidget ):
         self.drawLines(qp)
         qp.end()
 
-
-    def drawLines(self, qp):
     # triangle
+    def drawLines(self, qp):
+
         pen = QPen(Qt.black, 2, Qt.SolidLine)
 
         pen.setStyle(Qt.DashLine)
@@ -40,6 +41,11 @@ class Example( QWidget ):
 
         QToolTip.setFont( QFont('SansSerif',10) )
         self.setToolTip( 'This is a <b>QWidget</b> widget' )
+
+        label = QLabel(self)
+        label.move(10,260)
+        label.resize(270,50)
+        label.setText("ПРОТИВОПОЛОЖНАЯ СТОРОНА:")
         # input sides and corners of triangle
         sideA = QLineEdit(self)
         sideA.move(440, 360)
@@ -53,24 +59,30 @@ class Example( QWidget ):
         sideC.move(590, 200)
         sideC.resize(60, 30)
 
-        cornerA = QLineEdit(self)
-        cornerA.move(475, 130)
-        cornerA.resize(40, 30)
+        cornerF = QLineEdit(self)
+        cornerF.move(475, 130)
+        cornerF.resize(40, 30)
 
-        cornerB = QLineEdit(self)
-        cornerB.move(590, 315)
-        cornerB.resize(40, 30)
+        cornerE = QLineEdit(self)
+        cornerE.move(590, 315)
+        cornerE.resize(40, 30)
 
-        cornerC = QLineEdit(self)
-        cornerC.move(290, 315)
-        cornerC.resize(40, 30)
+        cornerG = QLineEdit(self)
+        cornerG.move(290, 315)
+        cornerG.resize(40, 30)
 
-
+        def function():
+            # if sideB.text()!=' ' and sideA.text()!=' ' and cornerG.text()!=' ':
+            if sideC.QLineEdit().isEmpty():
+                output = str(((int(sideB.text())**2 + int(sideA.text())**2 - (math.cos(int(cornerG.text())))**0.5)))
+                label.setText(f'ПРОТИВОПОЛОЖНАЯ СТОРОНА: {output}')
 
         btn = QPushButton( 'найти сторону',self )
         btn.setToolTip('This is a <b>QPushButton</b> widget')
         btn.resize(btn.sizeHint())
         btn.move(20,320)
+        # btn.clicked.connect(function)
+
 
         qbtn = QPushButton('Выйти', self)
         qbtn.clicked.connect( QCoreApplication.instance().quit )
@@ -83,7 +95,6 @@ class Example( QWidget ):
         self.setWindowIcon(QIcon( "D:\python-projects_Not_Git\интерфейс\skull.png" ))
 
         self.show()
-
 
 if __name__ == '__main__':
 
