@@ -43,8 +43,8 @@ class Example( QWidget ):
         self.setToolTip( 'This is a <b>QWidget</b> widget' )
 
         label = QLabel(self)
-        label.move(10,260)
-        label.resize(270,50)
+        label.move(10,50)
+        label.resize(500,50)
         label.setText("ПРОТИВОПОЛОЖНАЯ СТОРОНА:")
         # input sides and corners of triangle
         sideA = QLineEdit(self)
@@ -72,16 +72,23 @@ class Example( QWidget ):
         cornerG.resize(40, 30)
 
         def function():
-            # if sideB.text()!=' ' and sideA.text()!=' ' and cornerG.text()!=' ':
-            if sideC.QLineEdit().isEmpty():
-                output = str(((int(sideB.text())**2 + int(sideA.text())**2 - (math.cos(int(cornerG.text())))**0.5)))
-                label.setText(f'ПРОТИВОПОЛОЖНАЯ СТОРОНА: {output}')
+             if sideB.text().strip() and sideA.text().strip() and cornerG.text().strip():
+                output = str((int(sideB.text())**2 + int(sideA.text())**2 - (2*(int(sideB.text())*int(sideA.text()))*(math.cos(int(cornerG.text())))))**0.5)
+                label.setText(f'ПРОТИВОПОЛОЖНАЯ СТОРОНА = {output}')
+
+             elif sideB.text().strip() and sideC.text().strip() and cornerF.text().strip():
+                output = str((int(sideB.text())**2 + int(sideC.text())**2 - (2*(int(sideB.text())*int(sideC.text()))*(math.cos(int(cornerF.text())))))**0.5)
+                label.setText(f'ПРОТИВОПОЛОЖНАЯ СТОРОНА = {output}')
+
+             elif sideC.text().strip() and sideA.text().strip() and cornerE.text().strip():
+                output = str((int(sideC.text())**2 + int(sideA.text())**2 - (2*(int(sideC.text())*int(sideA.text()))*(math.cos(int(cornerE.text())))))**0.5)
+                label.setText(f'ПРОТИВОПОЛОЖНАЯ СТОРОНА = {output}')
 
         btn = QPushButton( 'найти сторону',self )
         btn.setToolTip('This is a <b>QPushButton</b> widget')
         btn.resize(btn.sizeHint())
         btn.move(20,320)
-        # btn.clicked.connect(function)
+        btn.clicked.connect(function)
 
 
         qbtn = QPushButton('Выйти', self)
