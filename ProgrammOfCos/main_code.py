@@ -4,6 +4,17 @@ from PyQt5.QtWidgets import*
 from PyQt5.QtGui import*
 from PyQt5.QtCore import*
 
+def theoremCos(side1,side2,corner,sideOut,corner1,corner2):
+    firstSide = int(side1.text())
+    secondSide = int(side2.text())
+    Corner = (int(corner.text())*math.pi/180)
+    output = str(round((firstSide**2 + secondSide**2 - (2*firstSide*secondSide*math.cos(Corner)))**0.5,1))
+    cornerA = math.cos((secondSide**2+int(output)**2-firstSide**2)/(2*secondSide*int(output)))
+    cornerB = 180-int(corner.text())-cornerA
+    sideOut.setText(f'{output}')
+    cornerA.setText(f'{cornerA}')
+    cornerB.setText(f'{cornerB}')
+
 class Example( QWidget ):
 
     def __init__( self ):
@@ -42,10 +53,6 @@ class Example( QWidget ):
         QToolTip.setFont( QFont('SansSerif',10) )
         self.setToolTip( 'This is a <b>QWidget</b> widget' )
 
-        label = QLabel(self)
-        label.move(10,50)
-        label.resize(500,50)
-        label.setText("ПРОТИВОПОЛОЖНАЯ СТОРОНА:")
         # input sides and corners of triangle
         sideA = QLineEdit(self)
         sideA.move(440, 360)
@@ -72,23 +79,15 @@ class Example( QWidget ):
         cornerG.resize(40, 30)
 
         def function():
-             if sideB.text().strip() and sideA.text().strip() and cornerG.text().strip():
-                side1 = int(sideB.text())
-                side2 = int(sideA.text())
-                corner = (int(cornerG.text())*math.pi/180)
+            if sideB.text().strip() and sideA.text().strip() and cornerG.text().strip():
+                 theoremCos(sideB,sideA,cornerG,sideC,cornerE,cornerF)
 
-             elif sideB.text().strip() and sideC.text().strip() and cornerF.text().strip():
-                side1 = int(sideB.text())
-                side2 = int(sideC.text())
-                corner = (int(cornerF.text())*math.pi/180)
+            elif sideB.text().strip() and sideC.text().strip() and cornerF.text().strip():
+                 theoremCos(sideB,sideC,cornerF,sideA)
 
-             elif sideC.text().strip() and sideA.text().strip() and cornerE.text().strip():
-                 side1 = int(sideC.text())
-                 side2 = int(sideA.text())
-                 corner = (int(cornerE.text())*math.pi/180)
+            elif sideC.text().strip() and sideA.text().strip() and cornerE.text().strip():
+                theoremCos(sideC,sideA,cornerE,sideB)
 
-             output = str((side1**2 + side2**2 - (2*side1*side2*math.cos(corner)))**0.5)
-             label.setText(f'ПРОТИВОПОЛОЖНАЯ СТОРОНА = {output}')
 
         btn = QPushButton( 'найти сторону',self )
         btn.setToolTip('This is a <b>QPushButton</b> widget')
