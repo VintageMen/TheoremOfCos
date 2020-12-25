@@ -73,16 +73,22 @@ class Example( QWidget ):
 
         def function():
              if sideB.text().strip() and sideA.text().strip() and cornerG.text().strip():
-                output = str((int(sideB.text())**2 + int(sideA.text())**2 - (2*(int(sideB.text())*int(sideA.text()))*(math.cos(int(cornerG.text())))))**0.5)
-                label.setText(f'ПРОТИВОПОЛОЖНАЯ СТОРОНА = {output}')
+                side1 = int(sideB.text())
+                side2 = int(sideA.text())
+                corner = (int(cornerG.text())*math.pi/180)
 
              elif sideB.text().strip() and sideC.text().strip() and cornerF.text().strip():
-                output = str((int(sideB.text())**2 + int(sideC.text())**2 - (2*(int(sideB.text())*int(sideC.text()))*(math.cos(int(cornerF.text())))))**0.5)
-                label.setText(f'ПРОТИВОПОЛОЖНАЯ СТОРОНА = {output}')
+                side1 = int(sideB.text())
+                side2 = int(sideC.text())
+                corner = (int(cornerF.text())*math.pi/180)
 
              elif sideC.text().strip() and sideA.text().strip() and cornerE.text().strip():
-                output = str((int(sideC.text())**2 + int(sideA.text())**2 - (2*(int(sideC.text())*int(sideA.text()))*(math.cos(int(cornerE.text())))))**0.5)
-                label.setText(f'ПРОТИВОПОЛОЖНАЯ СТОРОНА = {output}')
+                 side1 = int(sideC.text())
+                 side2 = int(sideA.text())
+                 corner = (int(cornerE.text())*math.pi/180)
+
+             output = str((side1**2 + side2**2 - (2*side1*side2*math.cos(corner)))**0.5)
+             label.setText(f'ПРОТИВОПОЛОЖНАЯ СТОРОНА = {output}')
 
         btn = QPushButton( 'найти сторону',self )
         btn.setToolTip('This is a <b>QPushButton</b> widget')
