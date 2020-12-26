@@ -7,13 +7,13 @@ from PyQt5.QtCore import*
 def theoremCos(side1,side2,corner,sideOut,corner1,corner2):
     firstSide = int(side1.text())
     secondSide = int(side2.text())
-    Corner = (int(corner.text())*math.pi/180)
+    Corner = int(corner.text())*math.pi/180
     output = str(round((firstSide**2 + secondSide**2 - (2*firstSide*secondSide*math.cos(Corner)))**0.5,1))
-    cornerA = math.cos((secondSide**2+int(output)**2-firstSide**2)/(2*secondSide*int(output)))
-    cornerB = 180-int(corner.text())-cornerA
+    cornerA = str(round(math.cos((secondSide**2+float(output)**2-firstSide**2)/(2*secondSide*float(output))),1))
+    cornerB = str(180-int(corner.text())-float(cornerA))
     sideOut.setText(f'{output}')
-    cornerA.setText(f'{cornerA}')
-    cornerB.setText(f'{cornerB}')
+    corner2.setText(f'{cornerA}')
+    corner1.setText(f'{cornerB}')
 
 class Example( QWidget ):
 
