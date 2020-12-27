@@ -12,8 +12,8 @@ def theoremCos(side1,side2,corner,sideOut,corner1,corner2):
     cornerA = str(round(math.cos((secondSide**2+float(output)**2-firstSide**2)/(2*secondSide*float(output))),1))
     cornerB = str(180-int(corner.text())-float(cornerA))
     sideOut.setText(f'{output}')
-    corner2.setText(f'{cornerA}')
-    corner1.setText(f'{cornerB}')
+    corner1.setText(f'{cornerA}')
+    corner2.setText(f'{cornerB}')
 
 class Example( QWidget ):
 
@@ -80,16 +80,16 @@ class Example( QWidget ):
 
         def function():
             if sideB.text().strip() and sideA.text().strip() and cornerG.text().strip():
-                 theoremCos(sideB,sideA,cornerG,sideC,cornerE,cornerF)
+                 theoremCos(sideB,sideA,cornerG,sideC,cornerF,cornerE)
 
             elif sideB.text().strip() and sideC.text().strip() and cornerF.text().strip():
-                 theoremCos(sideB,sideC,cornerF,sideA)
+                 theoremCos(sideB,sideC,cornerF,sideA,cornerE,cornerG)
 
             elif sideC.text().strip() and sideA.text().strip() and cornerE.text().strip():
-                theoremCos(sideC,sideA,cornerE,sideB)
+                theoremCos(sideC,sideA,cornerE,sideB,cornerF,cornerG)
 
 
-        btn = QPushButton( 'найти сторону',self )
+        btn = QPushButton( 'найти неизвестные',self )
         btn.setToolTip('This is a <b>QPushButton</b> widget')
         btn.resize(btn.sizeHint())
         btn.move(20,320)
@@ -103,7 +103,7 @@ class Example( QWidget ):
 
         #icon and size of window
         self.setGeometry( 300, 300, 1000, 500 )
-        self.setWindowTitle( 'XXX' )
+        self.setWindowTitle( 'TeoremOfCos' )
         self.setWindowIcon(QIcon( "D:\python-projects_Not_Git\интерфейс\skull.png" ))
 
         self.show()
